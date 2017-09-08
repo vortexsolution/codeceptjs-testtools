@@ -62,33 +62,6 @@ function loadMenu() {
       "onclick": click
     });
 
-    var fakerMenu = chrome.contextMenus.create({
-      "title": "Faker",
-      "parentId": parent,
-      "contexts":["all"]
-    });
-
-    var availableFaker = [
-      { type: "email", name: "Email" },
-      { type: "name", name: "Name" },
-      { type: "firstname", name: "Firstname" },
-      { type: "word", name: "Word" },
-      { type: "url", name: "URL" },
-    ];
-
-    availableFaker.forEach(function(fakerData){
-      chrome.contextMenus.create({
-        "title": fakerData.name,
-        "parentId": fakerMenu,
-        "contexts": ["all"],
-        "onclick": (function(type){
-          return function(info, tab) {
-            fake(info,tab,type);
-          };
-        }(fakerData.type))
-      });
-    });
-
   });
 }
 
