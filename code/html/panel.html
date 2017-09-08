@@ -43,10 +43,13 @@
         <code id="testcode" class="hljs php"></code>
       </pre>
       <code id="steps" style="display:none;">
-%FAKER%$I = new AcceptanceTester($scenario);
+Feature('Feature under test');
+
+Scenario('Scenario under test', (I) => {
 <template v-for="step in steps">
-  <template v-if="! step.faker && ! step.custom">{{indent}}I.{{ step.method }}({{ step.args | implode }});<template v-if="$index+1 < steps.length">{{linebreak}}</template></template><template v-if="step.faker">{{indent}}I.{{ step.method }}({{ step.args | implode true }});<template v-if="$index+1 < steps.length">{{linebreak}}</template></template><template v-if="step.custom">{{indent}}{{ step.action }};<template v-if="$index+1 < steps.length">{{linebreak}}</template></template>
+  <template v-if="! step.faker && ! step.custom">  I.{{ step.method }}({{ step.args | implode }});<template v-if="$index+1 < steps.length">{{linebreak}}</template></template><template v-if="step.faker">  I.{{ step.method }}({{ step.args | implode true }});<template v-if="$index+1 < steps.length">{{linebreak}}</template></template><template v-if="step.custom">{{indent}}{{ step.action }};<template v-if="$index+1 < steps.length">{{linebreak}}</template></template>
 </template>
+});
 </code>
     </div>
     <script src="../js/panel.js" charset="utf-8"></script>
