@@ -10,7 +10,7 @@ backgroundPageConnection.postMessage({
     tabId: chrome.devtools.inspectedWindow.tabId
 });
 
-chrome.devtools.panels.create("Codeception TestTools", null, "../html/panel.html", function(extensionPanel) {
+chrome.devtools.panels.create("CodeceptJS TestTools", null, "../html/panel.html", function(extensionPanel) {
     var _window;
     var steps;
 
