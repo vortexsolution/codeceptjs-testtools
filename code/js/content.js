@@ -33,11 +33,6 @@ var App = new Vue({
                 'method': 'amOnPage',
                 'args': [window.location.pathname]
             });
-          } else if (this.steps[this.steps.length-1].method === 'click') {
-            this.steps.push({
-                'method': 'seeCurrentURLEquals',
-                'args': [window.location.pathname]
-            });
           }
         }
 
@@ -66,17 +61,10 @@ var App = new Vue({
         $('input[type="checkbox"]').on('change', function(){
           if (self.recording === true) {
             var name    = $(this).attr("name");
-            if (this.checked) {
                 self.steps.push({
                     'method': 'checkOption',
                     'args': [name]
                 });
-            } else {
-                self.steps.push({
-                    'method': 'uncheckOption',
-                    'args': [name]
-                });
-            }
           }
         });
 
@@ -152,9 +140,9 @@ chrome.extension.onRequest.addListener(function(request) {
             'args': [window.location.pathname]
         });
     }
-    if(method === "seeCurrentURLEquals") {
+    if(method === "seeCurrentUrlEquals") {
         App.steps.push({
-            'method': 'seeCurrentURLEquals',
+            'method': 'seeCurrentUrlEquals',
             'args': [window.location.pathname]
         });
     }
