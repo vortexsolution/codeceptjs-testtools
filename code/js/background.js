@@ -35,7 +35,7 @@ function fake(info, tab, type) {
 function loadMenu() {
   chrome.contextMenus.removeAll(function() {
     // Create menu items
-    var parent = chrome.contextMenus.create({"title": "Codeception TestTools", "contexts":["all"]});
+    var parent = chrome.contextMenus.create({"title": "Add Test Step", "contexts":["all"]});
 
     chrome.contextMenus.create({
       "title": "Am on page",
