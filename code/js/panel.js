@@ -1,11 +1,10 @@
 var helper = require('./modules/helper'),
-    faker = require('faker/locale/en_US'),
     $ = require('jquery'),
-    hljs = require('./libs/highlight'),
+    hljs = require('highlightjs'),
     Vue = require('vue');
     Vue.config.devtools = false;
-    
-hljs.registerLanguage('php', require('./libs/languages/php'));
+
+hljs.initHighlightingOnLoad();
 
 var indent = "";
 var fakerText="";
