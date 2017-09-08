@@ -57,7 +57,9 @@ var App = new Vue({
             if (val) {
               val.forEach(function(attribute, key){
                   if (key === 0 && faker === true) {
-                    result += ""+attribute+", ";
+                      result += "" + attribute + ", ";
+                  } else if (!isNaN(parseFloat(attribute)) && isFinite(attribute)) {
+                      result += "" + attribute + ", ";
                   } else {
                     result += "'"+helper.addslashes(attribute)+"', ";
                   }

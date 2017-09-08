@@ -30,10 +30,6 @@ var App = new Vue({
             if (self.recording === true) {
                 if (this.steps.length === 0 || this.steps[this.steps.length - 1].method !== 'click') {
                     this.steps.push({
-                        'method': 'resizeWindow',
-                        'args': [1024, 768]
-                    });
-                    this.steps.push({
                         'method': 'amOnPage',
                         'args': [window.location.pathname]
                     });
