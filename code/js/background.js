@@ -44,22 +44,10 @@ function loadMenu() {
       "onclick": amOnPage
     });
     chrome.contextMenus.create({
-      "title": "See current URL equals...",
-      "parentId": parent,
-      "contexts":["all"],
-      "onclick": seeCurrentURLEquals
-    });
-    chrome.contextMenus.create({
       "title": "See",
       "parentId": parent,
       "contexts":["selection"],
       "onclick": see
-    });
-    chrome.contextMenus.create({
-      "title": "Click",
-      "parentId": parent,
-      "contexts":["all"],
-      "onclick": click
     });
 
   });
