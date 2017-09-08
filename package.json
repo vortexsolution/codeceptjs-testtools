@@ -2,7 +2,9 @@
   "name": "CodeceptJsTestTools",
   "version": "0.0.1",
   "description": "Chrome extension to generate CodeceptJS acceptance tests while using your app.",
-  "dependencies": {},
+  "dependencies": {
+    "highlightjs": "^9.10.0"
+  },
   "devDependencies": {
     "browserify": "^13.0.0",
     "faker": "^3.1.0",

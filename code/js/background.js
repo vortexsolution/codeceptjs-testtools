@@ -35,7 +35,7 @@ function fake(info, tab, type) {
 function loadMenu() {
   chrome.contextMenus.removeAll(function() {
     // Create menu items
-    var parent = chrome.contextMenus.create({"title": "Codeception TestTools", "contexts":["all"]});
+    var parent = chrome.contextMenus.create({"title": "Add Test Step", "contexts":["all"]});
 
     chrome.contextMenus.create({
       "title": "Am on page",
@@ -44,49 +44,10 @@ function loadMenu() {
       "onclick": amOnPage
     });
     chrome.contextMenus.create({
-      "title": "See current URL equals...",
-      "parentId": parent,
-      "contexts":["all"],
-      "onclick": seeCurrentURLEquals
-    });
-    chrome.contextMenus.create({
       "title": "See",
       "parentId": parent,
       "contexts":["selection"],
       "onclick": see
-    });
-    chrome.contextMenus.create({
-      "title": "Click",
-      "parentId": parent,
-      "contexts":["all"],
-      "onclick": click
-    });
-
-    var fakerMenu = chrome.contextMenus.create({
-      "title": "Faker",
-      "parentId": parent,
-      "contexts":["all"]
-    });
-
-    var availableFaker = [
-      { type: "email", name: "Email" },
-      { type: "name", name: "Name" },
-      { type: "firstname", name: "Firstname" },
-      { type: "word", name: "Word" },
-      { type: "url", name: "URL" },
-    ];
-
-    availableFaker.forEach(function(fakerData){
-      chrome.contextMenus.create({
-        "title": fakerData.name,
-        "parentId": fakerMenu,
-        "contexts": ["all"],
-        "onclick": (function(type){
-          return function(info, tab) {
-            fake(info,tab,type);
-          };
-        }(fakerData.type))
-      });
     });
 
   });

@@ -1,11 +1,10 @@
 var helper = require('./modules/helper'),
-    faker = require('faker/locale/en_US'),
     $ = require('jquery'),
-    hljs = require('./libs/highlight'),
+    hljs = require('highlightjs'),
     Vue = require('vue');
     Vue.config.devtools = false;
-    
-hljs.registerLanguage('php', require('./libs/languages/php'));
+
+hljs.initHighlightingOnLoad();
 
 var indent = "";
 var fakerText="";
@@ -58,7 +57,9 @@ var App = new Vue({
             if (val) {
               val.forEach(function(attribute, key){
                   if (key === 0 && faker === true) {
-                    result += ""+attribute+", ";
+                      result += "" + attribute + ", ";
+                  } else if (!isNaN(parseFloat(attribute)) && isFinite(attribute)) {
+                      result += "" + attribute + ", ";
                   } else {
                     result += "'"+helper.addslashes(attribute)+"', ";
                   }
