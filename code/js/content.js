@@ -36,7 +36,7 @@ var App = new Vue({
                 }
             }
 
-            $('textarea, input[type!="checkbox"][type!="file"][type!="submit"]').on('change', function () {
+            $(document.body).on('change', 'textarea, input[type!="checkbox"][type!="file"][type!="submit"]', function () {
                 if (self.recording === true) {
                     var name = $(this).attr("name"),
                         value = $(this).val();
@@ -47,7 +47,7 @@ var App = new Vue({
                 }
             });
 
-            $('input[type="file"]').on('change', function () {
+            $(document.body).on('change', 'input[type="file"]', function () {
                 if (self.recording === true) {
                     var name = $(this).attr("name"),
                         value = 'absolutePathToFile';
@@ -58,7 +58,7 @@ var App = new Vue({
                 }
             });
 
-            $('input[type="checkbox"]').on('change', function () {
+            $(document.body).on('change', 'input[type="checkbox"]', function () {
                 if (self.recording === true) {
                     var name = $(this).attr("name");
                     self.steps.push({
@@ -68,7 +68,7 @@ var App = new Vue({
                 }
             });
 
-            $('input[type="submit"],button,a').on('click', function () {
+            $(document.body).on('click', 'input[type="submit"],button,a', function () {
                 if (self.recording === true) {
                     var name = $(this).attr("name") || $(this).text().trim();
                     if (name === '') {
@@ -81,7 +81,7 @@ var App = new Vue({
                 }
             });
 
-            $('select').on('change', function () {
+            $(document.body).on('change', 'select', function () {
                 if (self.recording === true) {
                     var name = $(this).attr("name"),
                         value = $(this).val();
