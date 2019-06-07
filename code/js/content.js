@@ -3,6 +3,23 @@ var $ = require('jquery'),
     Vue = require('vue');
 Vue.config.devtools = false;
 
+var getElSelector = function( element ) {
+
+    var selector = null;
+
+    if($(element).attr("name")) {
+        selector = $(element).attr("name");
+    } else if($(element).attr('id')) {
+        selector = '#' + $(element).attr('id');
+    } else {
+        var classes =  $(element).attr('class');
+        if(classes) {
+            selector = '.' + classes.replace(/\s+/g, '.');
+        }
+    }
+    return selector;
+};
+
 var App = new Vue({
 
     data: {
@@ -38,8 +55,9 @@ var App = new Vue({
 
             $(document.body).on('change', 'textarea, input[type!="checkbox"][type!="file"][type!="submit"]', function () {
                 if (self.recording === true) {
-                    var name = $(this).attr("name"),
+                    var name = getElSelector( $(this) ),
                         value = $(this).val();
+
                     self.steps.push({
                         'method': 'fillField',
                         'args': [name, value]
@@ -47,9 +65,10 @@ var App = new Vue({
                 }
             });
 
+
             $(document.body).on('change', 'input[type="file"]', function () {
                 if (self.recording === true) {
-                    var name = $(this).attr("name"),
+                    var name = getElSelector( $(this) ),
                         value = 'absolutePathToFile';
                     self.steps.push({
                         'method': 'attachFile',
@@ -60,7 +79,8 @@ var App = new Vue({
 
             $(document.body).on('change', 'input[type="checkbox"]', function () {
                 if (self.recording === true) {
-                    var name = $(this).attr("name");
+                    var name = getElSelector( $(this) );
+
                     self.steps.push({
                         'method': 'checkOption',
                         'args': [name]
@@ -68,12 +88,16 @@ var App = new Vue({
                 }
             });
 
-            $(document.body).on('click', 'input[type="submit"],button,a', function () {
+            $(document.body).on('click', function (e) {
                 if (self.recording === true) {
-                    var name = $(this).attr("name") || $(this).text().trim();
+
+                    var this_element = $(e.target);
+                    var name = getElSelector( this_element ) || this_element.text().trim();
+
                     if (name === '') {
-                        name = $(this).val();
+                        name = this_element.val();
                     }
+
                     self.steps.push({
                         'method': 'click',
                         'args': [name]
@@ -83,7 +107,7 @@ var App = new Vue({
 
             $(document.body).on('change', 'select', function () {
                 if (self.recording === true) {
-                    var name = $(this).attr("name"),
+                    var name = getElSelector( $(this) ),
                         value = $(this).val();
                     self.steps.push({
                         'method': 'selectOption',
