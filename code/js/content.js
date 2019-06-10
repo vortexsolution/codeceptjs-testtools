@@ -1,6 +1,7 @@
-var $ = require('jquery'),
-    faker = require('faker/locale/en_US'),
-    Vue = require('vue');
+var $ = require('jquery');
+var faker = require('faker/locale/en_US');
+var Vue = require('vue');
+var CssSelectorGeneratorConst = require('css-selector-generator');
 Vue.config.devtools = false;
 
 var getElSelector = function( element ) {
@@ -91,22 +92,23 @@ var App = new Vue({
             $(document.body).on('click', function (e) {
                 if (self.recording === true) {
 
-                    var this_element = $(e.target);
-                    var name = getElSelector( this_element ) || this_element.text().trim();
-
-                    if (name === '') {
-                        name = this_element.val();
-                    }
+                    var mySelector = new CssSelectorGenerator;
+                    var selector = mySelector.getSelector(e.target);
 
                     self.steps.push({
                         'method': 'click',
-                        'args': [name]
+                        'args': [selector]
                     });
                 }
             });
 
-            $(document.body).on('change', 'select', function () {
+            $(document.body).on('change', 'select', function (e) {
                 if (self.recording === true) {
+
+                    var mySelector = new CssSelectorGenerator;
+                    var selector = mySelector.getSelector(e.target);
+                    console.log( selector );
+
                     var name = getElSelector( $(this) ),
                         value = $(this).val();
                     self.steps.push({
@@ -148,6 +150,15 @@ chrome.extension.onRequest.addListener(function (request) {
             'args': [request.text]
         });
     }
+    if (method === "seeElement") {
+        var mySelector = new CssSelectorGenerator;
+        var selector = mySelector.getSelector(clickedEl);
+        App.steps.push({
+           'method': 'seeElement',
+           'args': [selector]
+       });
+    }
+
     if (method === "click") {
         var name = $(clickedEl).attr("name") || $(clickedEl).text().trim();
         if (name === '') {
@@ -188,6 +199,7 @@ chrome.extension.onRequest.addListener(function (request) {
         App.recording = request.value;
         App.steps = [];
     }
+
     if (method === "undo") {
         App.steps.pop();
     }
@@ -223,7 +235,13 @@ chrome.extension.onRequest.addListener(function (request) {
             'args': [$(clickedEl).attr("name"), '$this->faker->' + request.type]
         });
     }
-
+    if( method === "pushStep") {
+        console.log('pushStep', request);
+        App.steps.push({
+           'method': request.value,
+           'args': [request.args]
+        });
+    }
     if (method === "getSteps") {
         chrome.extension.sendMessage({
             'steps': App.steps

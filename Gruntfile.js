@@ -34,7 +34,7 @@ module.exports = function(grunt) {
       main: { files: [ {
         expand: true,
         cwd: 'code/',
-        src: ['**', '!js/**', '!**/*.md'],
+        src: ['**', '!js/**', 'js/libs/*.js', '!**/*.md'],
         dest: 'build/unpacked-dev/'
       } ] },
       prod: { files: [ {

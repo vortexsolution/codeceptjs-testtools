@@ -1,5 +1,5 @@
 {
-  "node": true,
+  "node": false,
   "curly": true,
   "eqeqeq": true,
   "immed": true,
@@ -7,11 +7,12 @@
   "newcap": true,
   "noarg": true,
   "nonew": true,
-  "undef": true,
+  "undef": false,
   "evil": true,
   "trailing": true,
   "boss": true,
   "eqnull": true,
+  "-W058": true,
   "globals": {
     "FileReader": true,
     "beforeEach": true,

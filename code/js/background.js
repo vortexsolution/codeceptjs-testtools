@@ -6,7 +6,12 @@ function see(info, tab) {
       "text": info.selectionText
   });
 }
-
+function seeElement(info, tab) {
+    chrome.tabs.sendRequest( tab.id, {
+        "method": "seeElement",
+        "info": info
+    });
+}
 function click(info, tab) {
   chrome.tabs.sendRequest(tab.id, {
       "method": "click"
@@ -48,6 +53,12 @@ function loadMenu() {
       "parentId": parent,
       "contexts":["selection"],
       "onclick": see
+    });
+    chrome.contextMenus.create({
+        "title": "See Element",
+        "parentId": parent,
+        "contexts":["all"],
+        "onclick": seeElement
     });
 
   });

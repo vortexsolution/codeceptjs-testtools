@@ -82,7 +82,13 @@ var App = new Vue({
             'method': 'undo'
           });
       },
-
+      pushStep: function( method, args) {
+        _postMessage({
+            'method': 'pushStep',
+            'value': method,
+            'args' : [args]
+         });
+      },
       copyTest: function() {
         var self = this;
         var range = document.createRange();
