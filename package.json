@@ -17,7 +17,7 @@
     "grunt-contrib-watch": "^1.0.0",
     "grunt-crx": "^1.0.3",
     "grunt-mkdir": "^1.0.0",
-    "jquery": "^2.2.2",
+    "jquery": "^3.5.0",
     "vue": "1.0.24-csp"
   },
   "engines": {
